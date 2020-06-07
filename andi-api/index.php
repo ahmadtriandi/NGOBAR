@@ -195,12 +195,20 @@ foreach( $result['data'] as $hashtag) {
     
 
     <!-- hashtag #coding -->
-    <section class="hashtag" id="hashtag">
 
+    
+    <section class="hashtag" id="hashtag">
+      <div class="container">
+        <div class="row pt-4 mb-4">
+          <div class="col text-center">
+            <h2>Hashtag<span class="font-italic text-warning"> #coding</span></h2>
+          </div>
+        </div>
+              
     <div class="container">
     <div class="row ">
             <div class="col">
-            <?php foreach($photos as $photo) : ?>
+            <?php foreach($hashtagIG as $hashtagIG  ) : ?>
               <div class="ig-thumbnail mr-1">
                 <img src="<?= $hashtagIG; ?>" alt="">
               </div>
