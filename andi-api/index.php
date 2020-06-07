@@ -195,8 +195,6 @@ foreach( $result['data'] as $hashtag) {
     
 
     <!-- hashtag #coding -->
-
-    
     <section class="hashtag" id="hashtag">
       <div class="container">
         <div class="row pt-4 mb-4">
