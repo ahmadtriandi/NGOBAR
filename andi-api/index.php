@@ -1,3 +1,68 @@
+<?php
+
+function get_CURL($url) {
+
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER , false);
+  $result = curl_exec($curl);
+  curl_close($curl);
+
+  return json_decode($result, true); //untuk di jadikan array
+}
+
+$result = get_CURL('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UCkXmLjEr95LVtGuIm3l2dPg&key=AIzaSyAG4BQkWV541xfd-cDi7Y40QFMLJY6bQJ0');
+$youtubeProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
+$youtubeNamaAccount = $result['items'][0]['snippet']['title'];
+$youtubeSubscriber = $result['items'][0]['statistics']['subscriberCount'];
+
+//latest video
+$urlLatestVideo = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCkXmLjEr95LVtGuIm3l2dPg&maxResults=1&key=AIzaSyAG4BQkWV541xfd-cDi7Y40QFMLJY6bQJ0&order=date';
+
+$result1 = get_CURL($urlLatestVideo);
+$youtubeLatestVideo = $result1['items'][0]['id']['videoId'];
+
+
+
+//instagram Api
+
+$clientId = '859735457848515';
+$accessToken = 'EAAbBFtaPxX4BAMSzxyc5wiRAfJyupnZBTXZAqQ8pRuUQgCVO2iJm73LMTho9PtRIAKlrF5eZAWXtzve3B7R6KN1zET8qGimcjoCk5AWxZAGpHvRl1QQjaMKmy9y6oN05aqxZBnTAxlazyjRUH6onD06ugIlhpmTEdgNFoP07lTQZDZD';
+
+$result = get_CURL('https://graph.facebook.com/v7.0/100322171714946?fields=instagram_business_account%7Busername%2Cname%2Cig_id%2Cprofile_picture_url%2Cfollowers_count%7D&access_token=' . $accessToken . '');
+
+$usernameIG = $result['instagram_business_account']['username'];
+$profilePictureIG = $result['instagram_business_account']['profile_picture_url'];
+$followerIG = $result['instagram_business_account']['followers_count'];
+
+//media
+$result = get_CURL('https://graph.facebook.com/v7.0/17841402089694917?fields=business_discovery.username(triandiahmad91){username,website,name,ig_id,id,profile_picture_url,biography,follows_count,followers_count,media_count,media{caption,like_count,comments_count,media_url,permalink,media_type}}&access_token=' . $accessToken . '');
+
+$photos = [];
+
+foreach( $result['business_discovery']['media']['data'] as $photo) {
+  $photos[] = $photo['media_url'];
+}
+
+// hashtag
+
+$result = get_CURL('https://graph.facebook.com/v7.0/17841563020115819/recent_media?user_id=17841402089694917&fields=id,media_type,comments_count,like_count,media_url&access_token=' . $accessToken . '');
+
+$hashtagIG = [];
+
+foreach( $result['data'] as $hashtag) {
+  $hashtagIG[] = $hashtag['media_url'];
+  
+  
+  
+}
+
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -68,9 +133,85 @@
       </div>
     </section>
 
+    <!-- Youtube & IG -->
+    <section class="social bg-light " id="social">
+      <div class="container">
+        <div class="row pt-4 mb-4">
+          <div class="col text-center">
+            <h2>Social Media</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-4">
+                <img class="img-thumbnail rounded-circle" width="200px" src="<?= $youtubeProfilePic ?>" alt="">
+              </div>
+              <div class="col-md-8">
+                <h5><?= $youtubeNamaAccount; ?></h5>
+                <p><?= $youtubeSubscriber; ?> Subscribers</p>
+                <div class="g-ytsubscribe" data-channelid="UCkXmLjEr95LVtGuIm3l2dPg" data-layout="default" data-theme="dark" data-count="default"></div>
+              </div>
+            </div>
+
+            <div class="row mt-3 pb-3">
+              <div class="col">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?= $youtubeLatestVideo; ?>" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IG -->
+
+          <div class="col-md-5">
+            <div class="row">
+              <div class="col-md-4">
+                  <img class="img-thumbnail rounded-circle" width="200px" src="<?= $profilePictureIG; ?>" alt="">
+              </div>
+            <div class="col-md-8">
+              <h5><?= $usernameIG; ?></h5>
+              <p><?= $followerIG; ?> Followers. <Followers></Followers></p>
+            </div>
+          </div>
+
+          <div class="row mt-3 pb-3">
+            <div class="col">
+            <?php foreach($photos as $photo) : ?>
+              <div class="ig-thumbnail mr-1">
+                <img src="<?= $photo; ?>" alt="">
+              </div>
+            <?php endforeach; ?>
+            </div>
+          </div>
+    
+                    
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- hashtag #coding -->
+    <section class="hashtag" id="hashtag">
+
+    <div class="container">
+    <div class="row ">
+            <div class="col">
+            <?php foreach($photos as $photo) : ?>
+              <div class="ig-thumbnail mr-1">
+                <img src="<?= $hashtagIG; ?>" alt="">
+              </div>
+            <?php endforeach; ?>
+            </div>
+          </div>
+
+    </section>
 
     <!-- Portfolio -->
-    <section class="portfolio bg-light" id="portfolio">
+    <section class="portfolio" id="portfolio">
       <div class="container">
         <div class="row pt-4 mb-4">
           <div class="col text-center">
@@ -139,7 +280,7 @@
 
 
     <!-- Contact -->
-    <section class="contact" id="contact">
+    <section class="contact bg-light" id="contact">
       <div class="container">
         <div class="row pt-4 mb-4">
           <div class="col text-center">
@@ -216,5 +357,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
   </body>
 </html>
