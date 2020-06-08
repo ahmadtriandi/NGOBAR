@@ -72,7 +72,10 @@ foreach( $result['data'] as $hashtag) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
+    <!-- lightbox CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="gallery-grid.css">
     <!-- My CSS -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -196,92 +199,95 @@ foreach( $result['data'] as $hashtag) {
 
     <!-- hashtag #coding -->
     <section class="hashtag" id="hashtag">
-    <div class="container">
-        <div class="row pt-4 mb-4">
-          <div class="col text-center">
-            <h2>Hashtag<span class="font-italic text-warning"> #coding</span></h2>
-          </div>
-        </div>
-              
-    <div class="container">
-    <div class="row ">
-            <div class="col">
-            <?php foreach($hashtagIG as $hashtagIG  ) : ?>
-              <div class="ig-thumbnail mr-1">
-                <img src="<?= $hashtagIG; ?>" alt="">
-              </div>
-            <?php endforeach; ?>
+      <div class="container">
+          <div class="row pt-4 mb-4">
+            <div class="col text-center">
+              <h2>Hashtag<span class="font-italic text-warning"> #coding</span></h2>
             </div>
           </div>
-
+                
+        <div class="tz-gallery">
+          <div class="row ">
+            <div class="col">
+              <?php foreach($hashtagIG as $hashtagIG  ) : ?>
+                <a class="lightbox" href="<?= $hashtagIG; ?>">
+                  <div class="ig-thumbnail" mr-1">
+                    <img src="<?= $hashtagIG; ?>" alt="">
+                  </div>
+                </a>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>      
+      </div>
     </section>
 
-    <!-- Portfolio -->
-    <section class="portfolio" id="portfolio">
-      <div class="container">
-        <div class="row pt-4 mb-4">
-          <div class="col text-center">
-            <h2>Portfolio</h2>
+      <!-- Portfolio -->
+      <section class="portfolio" id="portfolio">
+        <div class="container">
+          <div class="row pt-4 mb-4">
+            <div class="col text-center">
+              <h2>Portfolio</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/1.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/2.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/3.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>   
+          </div>
+
+          <div class="row">
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/4.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div> 
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/5.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md mb-4">
+              <div class="card">
+                <img class="card-img-top" src="img/thumbs/6.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/1.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/2.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/3.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>   
-        </div>
-
-        <div class="row">
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/4.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div> 
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/5.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md mb-4">
-            <div class="card">
-              <img class="card-img-top" src="img/thumbs/6.png" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
 
@@ -364,5 +370,10 @@ foreach( $result['data'] as $hashtag) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/platform.js"></script>
+    <!-- lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>
+    baguetteBox.run('.tz-gallery');
+    </script>
   </body>
 </html>
