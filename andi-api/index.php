@@ -47,13 +47,14 @@ foreach( $result['business_discovery']['media']['data'] as $photo) {
 
 // hashtag
 
-$result = get_CURL('https://graph.facebook.com/v7.0/17841563020115819/recent_media?user_id=17841402089694917&fields=id,media_type,comments_count,like_count,media_url&access_token=' . $accessToken . '');
+$result = get_CURL('https://graph.facebook.com/v7.0/17844084019126274/recent_media?user_id=17841402089694917&fields=media_type,media_url&access_token='. $accessToken . '&limit=50');
 
 $hashtagIG = [];
 
 foreach( $result['data'] as $hashtag) {
+  if ($hashtag['media_type'] == 'IMAGE'){
   $hashtagIG[] = $hashtag['media_url'];
-  
+}
   
   
 }
@@ -202,21 +203,21 @@ foreach( $result['data'] as $hashtag) {
       <div class="container">
           <div class="row pt-4 mb-4">
             <div class="col text-center">
-              <h2>Hashtag<span class="font-italic text-warning"> #coding</span></h2>
+              <h2>Hashtag<span class="font-italic text-warning"> #kmupdates</span></h2>
             </div>
           </div>
                 
         <div class="tz-gallery">
-          <div class="row ">
-            <div class="col">
-              <?php foreach($hashtagIG as $hashtagIG  ) : ?>
-                <a class="lightbox" href="<?= $hashtagIG; ?>">
-                  <div class="ig-thumbnail" mr-1">
+          <div class="row justify-content-center">
+            <?php foreach($hashtagIG as $hashtagIG  ) : ?>
+              <a class="lightbox" href="<?= $hashtagIG; ?>">
+                <div class="col ">
+                  <div class="ig-thumbnail mr-1 mb-1">
                     <img src="<?= $hashtagIG; ?>" alt="">
                   </div>
+                </div>
                 </a>
               <?php endforeach; ?>
-            </div>
           </div>
         </div>      
       </div>
